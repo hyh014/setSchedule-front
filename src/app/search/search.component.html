@@ -1,0 +1,39 @@
+<div >
+    <label for="query">Search</label>
+    <input type="text" [(ngModel)]="search.query" required/>
+    <label for="zip">Zip Code</label>
+    <input type="text" pattern="[0-9]{5}" [(ngModel)]="search.zip" required/>
+    <label for="radius">Radius</label>
+    <select [(ngModel)]="search.radius" name="radius">
+        <option value="10" selected>10</option>
+        <option value="25">25</option>
+        <option value="50">50</option>
+    </select>
+    <input type="submit"  (click)="process()">
+</div>
+<div *ngIf="SearchResult.google">
+    <h2>Search Result</h2>
+    <div *ngFor="let item of SearchResult.google; let i = index">
+        {{i+1}} {{item.title}}
+        <div>
+            {{item.snippet}}
+
+        </div>
+    </div>
+
+
+    <h2>
+        Ticket Master Events
+    </h2>
+    <div *ngFor="let event of SearchResult.ticketMaster">
+        <a href="event.url">{{event.name}}</a>
+    </div>
+    <h2>
+        Wikipedia Snippet
+        <div>
+            <h3>{{SearchResult.wikipedia.title}}</h3>
+
+            {{SearchResult.wikipedia.extract}}
+        </div>
+    </h2>
+</div>
